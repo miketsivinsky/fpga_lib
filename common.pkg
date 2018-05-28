@@ -1,0 +1,44 @@
+//******************************************************************************
+//*
+//*      Project:     Any
+//*
+//*      Description: Common code definitions file
+//*
+//*      Version 1.0
+//*
+//*      Copyright (c) 2008-2010, Harry E. Zhurov
+//*
+//*      $Revision: 37 $
+//*      $Date:: 2010-07-28 20:56:24 #$
+//*
+//------------------------------------------------------------------------------
+
+`ifndef COMMON_H
+`define COMMON_H
+
+package common;
+
+//------------------------------------------------------------------------------
+function integer clog2 (input integer num); // this function calculates ceil(log2(num))
+begin
+    num = num - 1;                          // without this statement clog2(32) will be 6 but must be 5
+    for (clog2 = 0; num > 0; clog2 = clog2 + 1)
+        num = num >> 1;
+end
+endfunction
+//------------------------------------------------------------------------------
+function int max(input int x, input int y);
+    return x > y ? x : y;
+endfunction
+//------------------------------------------------------------------------------
+function int bits(input int x);
+    return  ( x == (1 << clog2(x)) ) ? clog2(x)+1 : clog2(x);
+endfunction
+//------------------------------------------------------------------------------
+
+
+endpackage
+import common::*;
+
+`endif // COMMON_H
+
